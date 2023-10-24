@@ -1,0 +1,188 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::after, *::before {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --read-clr: #2b9152;
+}
+
+body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    word-wrap: break-word;
+}
+
+header {
+    margin: 0;
+    padding: .5rem;
+    border-bottom: solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .bookshelf {
+    width: 48px;
+}
+
+header .logo {
+    display: flex;
+}
+
+header > h1 {
+    font-size: 3em;
+}
+
+header button.addBook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: bold;
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    border: solid black 1px;
+    background-color: none;
+    transition: 120ms ease-in-out;
+    transform: rotate(-90deg);
+}
+
+header button.addBook:hover {
+    transition: 120ms ease-in-out;
+    transform: scale(1.1) rotate(90deg);
+}
+
+main .books-container {
+    padding: 1em;
+    margin: 0;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-auto-columns: minmax(300px, 1fr);
+}
+
+.book {
+    padding: 1rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    line-height: 1.2;
+    font-size: 18px;
+    align-items: center;
+    border: solid;
+    height: 300px;
+}
+
+.book span {
+    border: solid;
+    padding: .5rem;
+    border-radius: 25px;
+}
+
+.book button {
+    cursor: pointer;
+    background-color: var(--read-clr);
+    padding: 1rem;
+    font-size: 1em;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+}
+
+.book button:hover {
+    transform: scale(1.1);
+}
+
+.modal {
+    z-index: 1;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border:solid;
+    border-radius: 25px;
+    padding: 1rem;
+    width: 400px;
+    /* height: 400px; */
+}
+
+.modal .form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-around;
+    gap: 2rem;
+    
+}
+
+.modal .form > div {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modal .form .status {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+}
+
+.modal .form button {
+    font-weight: bold;
+    cursor: pointer;
+    max-width: 40%;
+    align-self: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 25px;
+    font-size: 1.2em;
+    border: solid;
+}
+
+.title, .author, .pages {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+input[type="text"], input[type="number"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    border-bottom: solid;
+    width: 80;
+    font-size: 1.2rem;
+}
+
+input:focus {
+    outline: none;
+    padding: .5rem;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal.active {
+    display: block;
+}
+
+.overlay.active {
+    display: block;
+}
