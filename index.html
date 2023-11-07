@@ -21,28 +21,19 @@
     <main>
         <div class="books-container">
             <div class="book">
-                <span>Title: Harry Potter and the order of phoenix</span>
-                <span>Author: J. K. Rowling</span>
-                <span>Total pages: 912</span>
-                <button>Read</button>
-            </div>
-            <div class="book">
-                <span>Title: Harry Potter and the order of phoenix</span>
-                <span>Author: J. K. Rowling</span>
-                <span>Total pages: 912</span>
-                <button>Read</button>
-            </div>
-            <div class="book">
-                <span>Title: Harry Potter and the order of phoenix</span>
-                <span>Author: J. K. Rowling</span>
-                <span>Total pages: 912</span>
-                <button>Read</button>
+                <span>Title:</span>
+                <span>Author:</span>
+                <span>pages:</span>
+                <div class="bookControl">
+                    <button class="removeButton">Remove</button>
+                    <button class="statusButton">Read</button>
+                </div>
             </div>
         </div>
     </main>
     <div class="overlay">
         <div class="modal">
-            <form action="" method="dialog" class="form">
+            <form action="" method="dialog" class="form" id="bookForm">
                 <div class="form">
                     <div class="title">
                         <label for="title">Title</label>

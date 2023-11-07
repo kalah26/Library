@@ -9,12 +9,15 @@ html {
 }
 
 :root {
+    --txt-clr: black;
     --read-clr: #2b9152;
+    --rmvBtn-clr: red;
 }
 
 body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     word-wrap: break-word;
+    color: var(--txt-clr);
 }
 
 header {
@@ -51,12 +54,11 @@ header button.addBook {
     border: solid black 1px;
     background-color: none;
     transition: 120ms ease-in-out;
-    transform: rotate(-90deg);
 }
 
 header button.addBook:hover {
     transition: 120ms ease-in-out;
-    transform: scale(1.1) rotate(90deg);
+    transform: scale(1.2);
 }
 
 main .books-container {
@@ -76,25 +78,48 @@ main .books-container {
     gap: 1em;
     line-height: 1.2;
     font-size: 18px;
-    align-items: center;
     border: solid;
     height: 300px;
 }
 
 .book span {
+    display: flex;
+    align-items: center;
     border: solid;
+    height: 3em;
     padding: .5rem;
     border-radius: 25px;
 }
 
+.book div.bookControl {
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .book button {
+    flex: 1;
     cursor: pointer;
-    background-color: var(--read-clr);
     padding: 1rem;
     font-size: 1em;
     border-radius: 25px;
     outline: none;
     border: none;
+}
+
+.statusButton {
+    color: rgb(190, 173, 173);
+}
+
+.book .removeButton {
+    background-color: var(--rmvBtn-clr);
+}
+
+.read {
+    color: black;
+    background-color: var(--read-clr);
 }
 
 .book button:hover {
