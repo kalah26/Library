@@ -188,6 +188,7 @@ input[type="text"], input[type="number"] {
 }
 
 input:focus {
+    transform: none;
     outline: none;
     padding: .5rem;
 }

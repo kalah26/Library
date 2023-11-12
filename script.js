@@ -5,6 +5,10 @@ class Book {
     this.pages = pages;
     this.isRead = isRead;
     }
+    statusToggle() {
+        const statusButton = document.querySelector(".statusButton")
+        statusButton.addEventListener("click", () => statusButton.classList.toggle("read"))
+    }
 }
 
 class Library {
@@ -14,6 +18,9 @@ class Library {
     addNewBook(newBook) {
         this.bookShelf.push(newBook)
     }
+    // deleteBook() {
+    //     library.find()
+    // }
 }
 
 const library = new Library;
@@ -28,7 +35,7 @@ const addBook = document.querySelector(".addBook");
 const registerBook = document.querySelector("#registerBook");
 const bookForm = document.querySelector("#bookForm");
 const removeButton = document.querySelector(".removeButton")
-const statusButton = document.querySelector(".statusButton")
+const statusTButton = document.querySelector(".statusButton")
 
 //getting input from user
 function getNewBookInfo() {
@@ -58,11 +65,6 @@ function createNewBook(book) {
     bookPages.textContent = `Pages: ${book.pages}`
     removeButton.textContent = `Remove`
     statusButton.textContent = `Read`
-    if (book.isRead) {
-        statusButton.classList.add("read")
-    } else {
-        statusButton.classList.remove("read")
-    }
 
     bookControls.appendChild(removeButton);
     bookControls.appendChild(statusButton);
@@ -82,6 +84,7 @@ function updateBookshelf() {
     resetBookshelf();
     for (let book of library.bookShelf) {
         createNewBook(book);
+        book.statusToggle()
     }
 }
 
@@ -112,9 +115,6 @@ const escKeyRemoveModal = (e) => {
     if (e.key === "Escape") removeModal()
 }
 
-statusButton.addEventListener("click", () => {
-    statusButton.classList.toggle("read")
-})
 addBook.addEventListener("click", () => activateModal())
 registerBook.addEventListener("click", ()=> {
     addNewBook()
