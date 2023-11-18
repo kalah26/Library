@@ -1,26 +1,33 @@
 class Book {
-    constructor(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+    constructor(
+        title = 'Unknown',
+        author = 'Unknown',
+        pages = '0',
+        isRead = false
+    ) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
     }
-    statusToggle() {
-        const statusButton = document.querySelector(".statusButton")
-        statusButton.addEventListener("click", () => statusButton.classList.toggle("read"))
+
+    toggleRead() {
+        this.classList.toggle('read')
     }
 }
 
 class Library {
-    constructor () {
+    constructor() {
         this.bookShelf = []
     }
+
     addNewBook(newBook) {
-        this.bookShelf.push(newBook)
+        this.bookShelf.push(newBook);
     }
-    // deleteBook() {
-    //     library.find()
-    // }
+
+    removeBook(title) {  
+        this.bookShelf.splice(this.bookShelf.findIndex(book => book.title === title), 1);
+    }
 }
 
 const library = new Library;
@@ -64,7 +71,12 @@ function createNewBook(book) {
     bookAuthor.textContent = `Author: ${book.author}`
     bookPages.textContent = `Pages: ${book.pages}`
     removeButton.textContent = `Remove`
-    statusButton.textContent = `Read`
+    if (book.isRead) {
+        statusButton.textContent = `Read`
+        statusButton.classList.add("read")
+    } else {
+        statusButton.textContent = `not read`
+    }
 
     bookControls.appendChild(removeButton);
     bookControls.appendChild(statusButton);
@@ -74,6 +86,24 @@ function createNewBook(book) {
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookControls);
     booksContainer.appendChild(bookCard);
+
+    statusButton.addEventListener('click', ()=> {
+        if(statusButton.textContent == `not read`) {
+            book.isRead = true;
+            statusButton.classList.add('read');
+            statusButton.textContent = `read`;
+        } else {
+            book.isRead = false;
+            statusButton.classList.remove('read');
+            statusButton.textContent = `not read`
+        }
+    })
+
+    removeButton.addEventListener('click', (e) => {
+        console.log(e.target.parentNode.parentNode.firstChild.textContent)
+        library.removeBook(e.target.parentNode.parentNode.firstChild.textContent)
+        updateBookshelf();
+    })
 }
 
 function resetBookshelf() {
@@ -82,17 +112,12 @@ function resetBookshelf() {
 
 function updateBookshelf() {
     resetBookshelf();
-    for (let book of library.bookShelf) {
-        createNewBook(book);
-        book.statusToggle()
+    for (let i = 1; i < library.bookShelf.length; i++) {
+        createNewBook(library.bookShelf[i])
     }
 }
 
-function preventDefaults(e) {
-    e.preventDefault()
-}
-
-function addNewBook() {
+function addNewBook(e) {
     // e.preventDefault();
     const newBook = getNewBookInfo();
     createNewBook(newBook);
@@ -111,13 +136,21 @@ function removeModal() {
     modal.classList.remove("active")
 }
 
+function resetForm() {
+    bookForm.reset();
+}
+
 const escKeyRemoveModal = (e) => {
     if (e.key === "Escape") removeModal()
 }
 
-addBook.addEventListener("click", () => activateModal())
+addBook.addEventListener("click", () => {
+    activateModal()
+    resetForm()
+})
 registerBook.addEventListener("click", ()=> {
     addNewBook()
 })
+
 bookForm.onsubmit = addNewBook()
 window.onkeydown = escKeyRemoveModal
