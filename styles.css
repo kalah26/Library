@@ -9,6 +9,8 @@ html {
 }
 
 :root {
+    --bg-clr: #5746468a;
+    --bg-hdr: rgb(255, 255, 255);
     --txt-clr: black;
     --read-clr: #2b9152;
     --rmvBtn-clr: red;
@@ -18,9 +20,12 @@ body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     word-wrap: break-word;
     color: var(--txt-clr);
+    background-color: var(--bg-clr);
+    min-height: 100vh;
 }
 
 header {
+    background-color: var(--bg-hdr);
     margin: 0;
     padding: .5rem;
     border-bottom: solid;
@@ -43,6 +48,7 @@ header > h1 {
 
 header button.addBook {
     display: flex;
+    padding: 0;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -66,20 +72,21 @@ main .books-container {
     margin: 0;
     display: grid;
     grid-gap: 1em;
-    grid-template-columns: repeat(auto-fill, 300px);
-    grid-auto-columns: minmax(1fr, 300px);
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-auto-columns: minmax(1fr, 400px);
 }
 
 .book {
     padding: 1rem;
-    border-radius: 15px;
+    border-radius: 1em;
+    background-color: var(--bg-hdr);
     display: flex;
     flex-direction: column;
     gap: 1em;
     line-height: 1.2;
     font-size: 18px;
     border: solid;
-    height: 300px;
+    height: auto;
 }
 
 .book span {
@@ -89,6 +96,16 @@ main .books-container {
     height: 3em;
     padding: .5rem;
     border-radius: 25px;
+}
+
+.book .title {
+    display: flex;
+    word-break: break-all;
+    overflow: hidden;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: wrap;
+    justify-content: center;
 }
 
 .book div.bookControl {
@@ -149,7 +166,6 @@ main .books-container {
 .modal .form > div {
     display: flex;
     flex-direction: column;
-    
 }
 
 .modal .form .status {
@@ -163,12 +179,19 @@ main .books-container {
     font-weight: bold;
     cursor: pointer;
     max-width: 40%;
-    align-self: center;
+    align-self: flex-end;
     margin: 1rem;
     padding: 1rem;
     border-radius: 25px;
     font-size: 1.2em;
     border: solid;
+}
+
+.modal .form button:hover {
+    transform: scale(1.1);
+    transition: ease-in-out;
+    background-color: black;
+    color: white;
 }
 
 .title, .author, .pages {
@@ -179,17 +202,19 @@ main .books-container {
 }
 
 input[type="text"], input[type="number"] {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     appearance: none;
-    border: none;
-    border-bottom: solid;
+    border: solid rgb(0, 0, 0);
+    border-radius: 1em;
+    height: 5vh;
     width: 80;
     font-size: 1.2rem;
 }
 
 input:focus {
-    transform: none;
-    outline: none;
+    /* transform: none; */
+    outline: solid rgb(131, 109, 109);
+    border: none;
     padding: .5rem;
 }
 
@@ -200,7 +225,7 @@ input:focus {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(0, 0, 0, 0.5);
+    background-color: rgba(29, 27, 27, 0.74);
     width: 100vw;
     height: 100vh;
 }

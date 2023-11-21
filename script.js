@@ -26,7 +26,8 @@ class Library {
     }
 
     removeBook(title) {  
-        this.bookShelf.splice(this.bookShelf.findIndex(book => book.title === title), 1);
+        const index = this.bookShelf.findIndex(book => book.title === title);
+        this.bookShelf.splice(index, 1);
     }
 }
 
@@ -63,11 +64,12 @@ function createNewBook(book) {
     const statusButton = document.createElement('button');
 
     bookCard.classList.add("book");
+    bookTitle.classList.add("title")
     bookControls.classList.add("bookControl");
     removeButton.classList.add("removeButton");
     statusButton.classList.add("statusButton");
 
-    bookTitle.textContent = `Title: ${book.title}`
+    bookTitle.textContent = book.title
     bookAuthor.textContent = `Author: ${book.author}`
     bookPages.textContent = `Pages: ${book.pages}`
     removeButton.textContent = `Remove`
@@ -100,7 +102,6 @@ function createNewBook(book) {
     })
 
     removeButton.addEventListener('click', (e) => {
-        console.log(e.target.parentNode.parentNode.firstChild.textContent)
         library.removeBook(e.target.parentNode.parentNode.firstChild.textContent)
         updateBookshelf();
     })
